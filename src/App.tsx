@@ -5,11 +5,11 @@ import Wallet from './pages/Wallet';
 
 function App() {
   return (
-  <Routes>
-    <Route path='/' element={ <Login /> }/>
-    <Route path='/carteira' element={ <Wallet/>} />
-  </Routes>  
-  )
+    <Routes>
+      <Route path="/" element={ <Login /> } />
+      <Route path="/carteira" element={ <Wallet /> } />
+    </Routes>
+  );
 }
 
 export default App;

@@ -29,7 +29,7 @@ function WalletForm() {
     const d = rootState.wallet.expenses;
     const obj = {
       id: d.length > 0 ? d[d.length - 1].id + 1 : 0,
-      value: Number(valor),
+      value: valor,
       description: descript,
       currency: moeda,
       method: tipo,

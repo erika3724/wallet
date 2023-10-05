@@ -19,7 +19,7 @@ function wallet(state = INITIAL_STATE, action: ActionType) {
     case 'click':
       return {
         ...state,
-        expenses: [...state.expenses, action.payload],
+        expenses: [action.payload, ...state.expenses],
       };
     default:
       return state;

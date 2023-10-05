@@ -26,11 +26,10 @@ function requestFailed(error: any) {
   };
 }
 
-const save = (data: string[], a: number) => {
+const save = (data: string[]) => {
   return {
     type: 'click',
     payload: data,
-    soma: a.toFixed(2),
   };
 };
 
@@ -54,10 +53,7 @@ const fecthData2 = (a: any) => {
       const data = await fetch('https://economia.awesomeapi.com.br/json/all');
       const result = await data.json();
       a.exchangeRates = result;
-      const mn: any = Object.entries(a.exchangeRates)
-        .filter((z: any) => z[0] === a.currency)[0][1];
-      const vaa = a.value * Number(mn.ask);
-      dispatch(save(a, vaa));
+      dispatch(save(a));
     } catch (error: any) {
       dispatch(requestFailed);
     }

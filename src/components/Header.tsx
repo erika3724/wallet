@@ -21,7 +21,7 @@ function Header() {
   return (
     <header>
       <p data-testid="email-field">{ user.email }</p>
-      <p data-testid="total-field">{ field.toFixed(2) }</p>
+      <p data-testid="total-field">{ field.toFixed(2).toString() }</p>
       <p data-testid="header-currency-field">BRL</p>
     </header>
   );

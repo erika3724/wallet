@@ -1,9 +1,15 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Gs } from './Header';
+import { Dispatch } from './WalletForm';
+import { remove } from '../redux/actions';
 
 function Table() {
   const { user, wallet } = useSelector((state: Gs) => state);
-
+  const dispatch: Dispatch = useDispatch();
+  const exclui = (z: number) => {
+    const mn = wallet.expenses.filter((m) => m.id !== z);
+    dispatch(remove(mn));
+  };
   return (
     <table style={ { textAlign: 'center' } }>
       <thead>
@@ -20,7 +26,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {wallet.expenses.map((a, i) => (
+        {wallet.expenses.map((a) => (
           <tr key={ a.id }>
             <td>{ a.description }</td>
             <td>{ a.tag }</td>
@@ -30,14 +36,20 @@ function Table() {
             <td>
               {Number(a.exchangeRates[a.currency]
                 .ask).toFixed(2)}
-
             </td>
             <td>
               {(Number(a.exchangeRates[a.currency]
                 .ask) * Number(a.value)).toFixed(2) }
             </td>
             <td>Real</td>
-            <td />
+            <td>
+              <button
+                data-testid="delete-btn"
+                onClick={ () => exclui(a.id) }
+              >
+                X
+              </button>
+            </td>
           </tr>
         )) }
       </tbody>

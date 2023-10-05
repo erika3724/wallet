@@ -32,6 +32,12 @@ const save = (data: string[]) => {
     payload: data,
   };
 };
+const remove = (data: any[]) => {
+  return {
+    type: 'remove',
+    payload: data,
+  };
+};
 
 const fecthData = () => {
   return async (dispatch: any) => {
@@ -60,4 +66,4 @@ const fecthData2 = (a: any) => {
   };
 };
 
-export { fecthData, fecthData2 };
+export { fecthData, fecthData2, remove };

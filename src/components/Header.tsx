@@ -1,18 +1,29 @@
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-type Gs = {
+export type Gs = {
   user: { email:string },
-  wallet: { currency: string, field: number }
+  wallet: { currencies: string[], field: number, expenses: any[] }
 };
 
 function Header() {
   const { user, wallet } = useSelector((state: Gs) => state);
+  const [field, setField] = useState(0);
+  useEffect(() => {
+    if (wallet.expenses[0]) {
+      const bel = wallet.expenses[0].currency;
+      const [abelha]: any[] = Object.entries(wallet.expenses[0]?.exchangeRates)
+        .filter((a) => a[0] === bel);
+      const num = Number(abelha[1].ask) * Number(wallet.expenses[0]?.value);
+      setField(field + num);
+    }
+  }, [wallet]);
   return (
-    <div>
+    <header>
       <p data-testid="email-field">{ user.email }</p>
-      <p data-testid="total-field">{ wallet.field }</p>
-      <p data-testid="header-currency-field">{ wallet.currency }</p>
-    </div>
+      <p data-testid="total-field">{ field.toFixed(2) }</p>
+      <p data-testid="header-currency-field">BRL</p>
+    </header>
   );
 }
 

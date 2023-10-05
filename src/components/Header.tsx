@@ -11,10 +11,12 @@ function Header() {
   const [field, setField] = useState(0);
   useEffect(() => {
     if (wallet.expenses[0]) {
-      const bel = wallet.expenses[0].currency;
-      const [abelha]: any[] = Object.entries(wallet.expenses[0]?.exchangeRates)
+      const bel = wallet.expenses[wallet.expenses.length - 1].currency;
+      const [abelha]: any[] = Object
+        .entries(wallet.expenses[wallet.expenses.length - 1]?.exchangeRates)
         .filter((a) => a[0] === bel);
-      const num = Number(abelha[1].ask) * Number(wallet.expenses[0]?.value);
+      const num = Number(abelha[1].ask)
+        * Number(wallet.expenses[wallet.expenses.length - 1]?.value);
       setField(field + num);
     }
   }, [wallet]);

@@ -11,13 +11,8 @@ function Header() {
   const [field, setField] = useState(0);
   useEffect(() => {
     if (wallet.expenses[0]) {
-      const bel = wallet.expenses[wallet.expenses.length - 1].currency;
-      const [abelha]: any[] = Object
-        .entries(wallet.expenses[wallet.expenses.length - 1]?.exchangeRates)
-        .filter((a) => a[0] === bel);
-
       const nova:number[] = wallet.expenses
-        .map((a) => Number(abelha[1].ask) * Number(a.value));
+        .map((a) => a.exchangeRates[a.currency].ask * a.value);
       const result:any = nova.reduce((a, b) => Number(a) + Number(b));
       setField(Number(result));
     }
@@ -28,8 +23,8 @@ function Header() {
     <header>
       <p data-testid="email-field">{ user.email }</p>
       <p data-testid="total-field">
-        { field
-          .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }
+        { field.toFixed(2)
+          .toString() }
 
       </p>
       <p data-testid="header-currency-field">BRL</p>
